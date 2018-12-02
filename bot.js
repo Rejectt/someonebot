@@ -356,7 +356,7 @@ client.on("guildMemberAdd", member => {
 client.on('message', message => {
   if (true) {
 if (message.content === '-invite') {
-      message.author.send('  https://discordapp.com/oauth2/authorize?client_id=515951600154705960&scope=bot&permissions=36760572|  رابط دعوه مالتي بوت     ').catch(e => console.log(e.stack));
+      message.author.send('  https://discordapp.com/oauth2/authorize?client_id=515951600154705960&scope=bot&permissions=36760572|  رابط دعوه  بوت     ').catch(e => console.log(e.stack));
 
     }
    } 
@@ -368,7 +368,7 @@ client.on('message', message => {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#9B59B6")
-  .addField("تم ارسال رابط البوت في الخاص , شكرا لاستخدام مالتي بوت ")
+  .addField("تم ارسال رابط البوت في الخاص , شكرا لاستخدام البوت ")
      
      
      
