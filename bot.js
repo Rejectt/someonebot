@@ -47,6 +47,8 @@ message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !b
 **`);
     }
 });    
+
+
 client.on('message', message => {
     if(command === "مسح") {
         const emoji = client.emojis.find("name", "wastebasket")
