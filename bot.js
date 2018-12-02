@@ -408,25 +408,3 @@ client.on('message', function(message) {
         }
     }
 });
-
-
-  let args = message.content.split(" ").slice(1);
-if(command == "id") {
-    var Canvas = require('canvas')
-  , Image = new Canvas.Image
-  , canvas = new Canvas(450, 170)
-  , ctx = canvas.getContext('2d');
-  ctx.font = '15px Impact';
-Image.src = canvas.toBuffer();
-tx.drawImage(Image, 0, 0, Image.width / 470, Image.height / 170);
-ctx.fillText(${moment(heg.createdTimestamp).fromNow()},90, 20);
-ctx.fillText(${moment(h.joinedAt).fromNow()},110, 70);
-ctx.fillText(${heg.username},70, 40);
-ctx.fillText(${h.presence.status},50, 70);
-ctx.beginPath();
-ctx.lineTo(50, 102);
-ctx.stroke();
-message.channel.sendFile(canvas.toBuffer());
-}
-}
-});
