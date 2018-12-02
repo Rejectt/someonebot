@@ -22,21 +22,21 @@ client.user.setStatus("dnd");
 client.on('message', message => {
      if (message.content === "-help") {
 message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !bc**" + `  **
-ل عمل تيكيت :!new 
+ل عمل تيكيت :-new 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
-لـ قفل التيكيت !close 
+لـ قفل التيكيت -close 
 لـ انشاء الوان !cc عدد الالوان 
 حصول علي رتبه ريمبو  يجب اولا الحصول علي [Premuim] لتفعيل البريميوم تواصل مع [X-49#4908]
-لـ رابط دعوه البوت : !invite
-لـ عمل كيك لاي عضو : !kick
-لـ عمل باند لاي عضو : !ban 
-لـ عمل ميوت لـ عضو :!mute [محتمل عطل]
-لـ عرض معلومات السيرفر:!server
+لـ رابط دعوه البوت : -invite
+لـ عمل كيك لاي عضو : -kick
+لـ عمل باند لاي عضو : -ban 
+لـ عمل ميوت لـ عضو :-mute [محتمل عطل]
+لـ عرض معلومات السيرفر:-server
 **`);
     }
 });    
 client.on('message', message => {
-    var prefix = "!";
+    var prefix = "-";
    
         if (message.author.id === client.user.id) return;
         if (message.guild) {
@@ -63,7 +63,7 @@ client.on('message', message => {
         }
     }); 
 	client.on('message', message => {
- var prefix = "!"
+ var prefix = "-"
 if (message.content.toLowerCase().startsWith(prefix + `new`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
@@ -115,7 +115,7 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 });
 
 client.on('message', msg => {
-	var prefix = "!";
+	var prefix = "-";
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -141,7 +141,7 @@ client.on('message', msg => {
 
 client.on('message', message => {
     if(!message.channel.guild) return;
-var prefix = "!";
+var prefix = "-";
 if(message.content.startsWith(prefix + 'ch')) {
     let channel = message.channel
     var embed = new Discord.RichEmbed()
@@ -160,7 +160,7 @@ if(message.content.startsWith(prefix + 'ch')) {
 
 
 client.on('message', message => {
-var prefix = "!";
+var prefix = "-";
       if(message.content === prefix + "قفل") {
       if(!message.channel.guild) return;
       if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You Dont Have Perms ❌');
@@ -173,7 +173,7 @@ var prefix = "!";
 
 
 client.on('message', message => {
-var prefix = "!";
+var prefix = "-";
       if(message.content === prefix + "فتح") {
       if(!message.channel.guild) return;
       if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('❌');
@@ -202,7 +202,7 @@ var prefix = "!";
 
 
 client.on('message', message => {
-	var prefix = "!"
+	var prefix = "-"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -239,7 +239,7 @@ client.on('message', message => {
 });
 
  client.on('message', message => {
-	var prefix = "!"
+	var prefix = "-"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -279,7 +279,7 @@ client.on('message', message => {
 
 client.on('message', async message =>{
     if (message.author.boss) return;
-      var prefix = "!";
+      var prefix = "-";
   
   if (!message.content.startsWith(prefix)) return;
       let command = message.content.split(" ")[0];
@@ -337,7 +337,7 @@ client.on('message', async message =>{
   });
 
 client.on('message',function(message) {
-    let prefix = "!";
+    let prefix = "-";
 let args = message.content.split(" ").slice(1).join(" ");
 if(message.content.startsWith(prefix + "say")) {
 if(!args) return;
@@ -355,7 +355,7 @@ client.on("guildMemberAdd", member => {
 
 client.on('message', message => {
   if (true) {
-if (message.content === '!invite') {
+if (message.content === '-invite') {
       message.author.send('  https://discordapp.com/oauth2/authorize?client_id=515951600154705960&scope=bot&permissions=36760572|  رابط دعوه مالتي بوت     ').catch(e => console.log(e.stack));
 
     }
@@ -364,7 +364,7 @@ if (message.content === '!invite') {
 
 
 client.on('message', message => {
-     if (message.content === "!invite") {
+     if (message.content === "-invite") {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#9B59B6")
