@@ -30,7 +30,7 @@ client.user.setStatus("dnd");
 
 
 client.on('message', message => {
-     if (message.content === "ms") {
+     if (message.content === "-help") {
 message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !bc**" + `  **
 ل عمل تيكيت :!new 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
