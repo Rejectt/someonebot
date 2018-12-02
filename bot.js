@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 
 
-client.login('NTE1OTUxNjAwMTU0NzA1OTYw.DuWWeA.pJJU8wh2fWINgjfgA39AH6RsVGs'); 
+client.login('NTE4MTQ5NDc0ODgzOTkzNjAy.DuXJ7g._nnDc7xfRNeoSlHmaZsuoq_t1FM'); 
 
 
 
@@ -158,12 +158,6 @@ if(message.content.startsWith(prefix + 'ch')) {
     });
 	
 
-	client.on("ready", () => {
-  function lol() {
-    client.guilds.get('518012022500229122').roles.find("name", "RainBoww").setColor("RANDOM");
-  };
-  setInterval(lol, 1600);
-});
 
 client.on('message', message => {
 var prefix = "!";
