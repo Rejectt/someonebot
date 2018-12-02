@@ -205,3 +205,5 @@ if (message.content === '-invite') {
         }
     }
 });
+
+const Discord = require("discord.js"); const client = new Discord.Client(); client.on('ready', () => { console.log(`Logged in as ${client.user.tag} !`); client.user.setActivity("welcome to Mircale server | -help",{type: 'WATCHING'}); }); client.login("NTE4MTQ5NDc0ODgzOTkzNjAy.DuW9hQ.T0r8v-RaSgVIuQJAi_uxRm5bzXc") \\\توكن حسابك
