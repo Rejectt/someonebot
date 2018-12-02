@@ -68,14 +68,6 @@ if(message.content.startsWith(prefix + 'ch')) {
  
     });
 	
-
-	client.on("ready", () => {
-  function lol() {
-    client.guilds.get('441615240006729728').roles.find("name", "RainBow").setColor("RANDOM");
-  };
-  setInterval(lol, 1600);
-});
-
 client.on('message', message => {
 var prefix = "-";
       if(message.content === prefix + "قفل") {
