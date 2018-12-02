@@ -49,23 +49,6 @@ message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !b
 });    
 
 
-client.on('message', message => {
-    if(command === "-مسح") {
-        const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if (textxt == "") {
-        msg.delete().then
-    msg.channel.send("***```ضع عدد الكلمات التي تريد مسحها```***").then(m => m.delete(3000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```Cleard: " + textxt + "\n Messages```").then(m => m.delete(3000));
-        }    
-    }
-}
-});
 
 client.on('message', message => {
     if(!message.channel.guild) return;
