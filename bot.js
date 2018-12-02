@@ -21,7 +21,7 @@ client.user.setStatus("dnd");
 
 client.on('message', message => {
      if (message.content === "-help") {
-message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !bc**" + `  **
+message.author.send("**لـ ارسال رسالة لجميع الاعضاء : -bc**" + `  **
 ل عمل تيكيت :-new 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
 لـ قفل التيكيت -close 
@@ -31,7 +31,7 @@ message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !b
 لـ عمل كيك لاي عضو : -kick
 لـ عمل باند لاي عضو : -ban 
 لـ عمل ميوت لـ عضو :-mute [محتمل عطل]
-لـ عرض معلومات السيرفر:-server
+لـ عرض صورتك الشخصية:-avatar
 **`);
     }
 });    
