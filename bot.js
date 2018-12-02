@@ -50,7 +50,7 @@ message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !b
 
 
 client.on('message', message => {
-    if(command === "مسح") {
+    if(command === "-مسح") {
         const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
