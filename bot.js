@@ -414,7 +414,6 @@ const Canvas = require('canvas')
 const jimp = require('jimp')
 const moment = require('moment')
 const prefix = '-';
-
 client.on('message', message => {
     let command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
