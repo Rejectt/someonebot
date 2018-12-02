@@ -1,7 +1,12 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+
+
+
 client.login('NTE1OTUxNjAwMTU0NzA1OTYw.DuWWeA.pJJU8wh2fWINgjfgA39AH6RsVGs'); 
+
+
 
 client.on('ready',  () => {
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
@@ -15,23 +20,102 @@ client.user.setStatus("dnd");
 
 
 client.on('message', message => {
-     if (message.content === "-help") {
-message.author.send("**<<" + `  **
-ل عمل تيكيت :-new 
+     if (message.content === "mh") {
+message.author.send("**لـ ارسال رسالة لجميع الاعضاء : !bc**" + `  **
+ل عمل تيكيت :!new 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
-لـ قفل التيكيت -close
-حصول علي رتبه ريمبو  يجب التواصل مع صاحب السيرفر والحصول عليها
-لـ رابط دعوه البوت : -invite
-لـ عمل كيك لاي عضو : -kick
-لـ عمل باند لاي عضو : -ban 
-لـ رؤيه افاتار الخاص بك :-avatar
-لـ رؤية معلومات الروم :-ch
+لـ قفل التيكيت !close 
+لـ انشاء الوان !cc عدد الالوان 
+حصول علي رتبه ريمبو  يجب اولا الحصول علي [Premuim] لتفعيل البريميوم تواصل مع [X-49#4908]
+لـ رابط دعوه البوت : !invite
+لـ عمل كيك لاي عضو : !kick
+لـ عمل باند لاي عضو : !ban 
+لـ عمل ميوت لـ عضو :!mute [محتمل عطل]
+لـ عرض معلومات السيرفر:!server
 **`);
     }
 });    
+client.on('message', message => {
+    var prefix = "!";
+   
+        if (message.author.id === client.user.id) return;
+        if (message.guild) {
+       let embed = new Discord.RichEmbed()
+        let args = message.content.split(' ').slice(1).join(' ');
+    if(message.content.split(' ')[0] == prefix + 'bc') {
+        if (!args[1]) {
+    message.channel.send("*bc <message>");
+    return;
+    }
+            message.guild.members.forEach(m => {
+       if(!message.member.hasPermission('ADMINISTRATOR')) return;
+                var bc = new Discord.RichEmbed()
+                .addField('» السيرفر :', `${message.guild.name}`)
+                .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
+                .addField(' » الرسالة : ', args)
+                .setColor('#ff0000')
+                // m.send(`[${m}]`);
+                m.send(`${m}`,{embed: bc});
+            });
+        }
+        } else {
+            return;
+        }
+    }); 
+	client.on('message', message => {
+ var prefix = "!"
+if (message.content.toLowerCase().startsWith(prefix + `new`)) {
+    const reason = message.content.split(" ").slice(1).join(" ");
+    if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+    if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`يوجد بالفعل تكت مفتوح.`);
+    message.guild.createChannel(`ticket-${message.author.id}`, "text").then(c => {
+        let role = message.guild.roles.find("name", "Support Team");
+        let role2 = message.guild.roles.find("name", "@everyone");
+        c.overwritePermissions(role, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
+        });
+        c.overwritePermissions(role2, {
+            SEND_MESSAGES: false,
+            READ_MESSAGES: false
+        });
+        c.overwritePermissions(message.author, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
+        });
+        message.channel.send(`:white_check_mark: Your ticket has been created, #${c.name}.`);
+        const embed = new Discord.RichEmbed()
+        .setColor(0xCF40FA)
+        .addField(`Hey ${message.author.username}!`, `نرجو توضيح السبب , سيكون فريق الدعم هنا قريبا لخدمتك.`)
+        .setTimestamp();
+        c.send({ embed: embed });
+    }).catch(console.error);
+}
+if (message.content.toLowerCase().startsWith(prefix + `close`)) {
+    if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+
+    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
+    .then((m) => {
+      message.channel.awaitMessages(response => response.content === '-confirm', {
+        max: 1,
+        time: 10000,
+        errors: ['time'],
+      })
+      .then((collected) => {
+          message.channel.delete();
+        })
+        .catch(() => {
+          m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
+              m2.delete();
+          }, 3000);
+        });
+    });
+}
+
+});
 
 client.on('message', msg => {
-	var prefix = "-";
+	var prefix = "!";
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -57,7 +141,7 @@ client.on('message', msg => {
 
 client.on('message', message => {
     if(!message.channel.guild) return;
-var prefix = "-";
+var prefix = "!";
 if(message.content.startsWith(prefix + 'ch')) {
     let channel = message.channel
     var embed = new Discord.RichEmbed()
@@ -73,8 +157,16 @@ if(message.content.startsWith(prefix + 'ch')) {
  
     });
 	
+
+	client.on("ready", () => {
+  function lol() {
+    client.guilds.get('518012022500229122').roles.find("name", "RainBoww").setColor("RANDOM");
+  };
+  setInterval(lol, 1600);
+});
+
 client.on('message', message => {
-var prefix = "-";
+var prefix = "!";
       if(message.content === prefix + "قفل") {
       if(!message.channel.guild) return;
       if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You Dont Have Perms ❌');
@@ -87,7 +179,7 @@ var prefix = "-";
 
 
 client.on('message', message => {
-var prefix = "-";
+var prefix = "!";
       if(message.content === prefix + "فتح") {
       if(!message.channel.guild) return;
       if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('❌');
@@ -116,7 +208,7 @@ var prefix = "-";
 
 
 client.on('message', message => {
-	var prefix = "-"
+	var prefix = "!"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -153,7 +245,7 @@ client.on('message', message => {
 });
 
  client.on('message', message => {
-	var prefix = "-"
+	var prefix = "!"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -251,7 +343,7 @@ client.on('message', async message =>{
   });
 
 client.on('message',function(message) {
-    let prefix = "-";
+    let prefix = "!";
 let args = message.content.split(" ").slice(1).join(" ");
 if(message.content.startsWith(prefix + "say")) {
 if(!args) return;
@@ -269,8 +361,8 @@ client.on("guildMemberAdd", member => {
 
 client.on('message', message => {
   if (true) {
-if (message.content === '-invite') {
-      message.author.send(' https://discordapp.com/oauth2/authorize?client_id=518149474883993602&scope=bot&permissions=36760572|  رابط  بوت     ').catch(e => console.log(e.stack));
+if (message.content === '!invite') {
+      message.author.send('  https://discordapp.com/oauth2/authorize?client_id=515951600154705960&scope=bot&permissions=36760572|  رابط دعوه مالتي بوت     ').catch(e => console.log(e.stack));
 
     }
    } 
@@ -278,32 +370,14 @@ if (message.content === '-invite') {
 
 
 client.on('message', message => {
-     if (message.content === "-invite") {
+     if (message.content === "!invite") {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#9B59B6")
-  .addField("تم ارسال رابط البوت في الخاص  ")
+  .addField("تم ارسال رابط البوت في الخاص , شكرا لاستخدام مالتي بوت ")
      
      
      
   message.channel.sendEmbed(embed);
     }
 });
-
-client.on('message', message => {
-    if (message.content.startsWith("-avatar")) {
-        var mentionned = message.mentions.users.first();
-    var x5bzm;
-      if(mentionned){
-          var x5bzm = mentionned;
-      } else {
-          var x5bzm = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setImage(`${x5bzm.avatarURL}`)
-      message.channel.sendEmbed(embed);
-    }
-});
-
