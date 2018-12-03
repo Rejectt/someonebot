@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.user.setGame(``,'https://www.twitch.tv/tarikrs'); 
 
 
 client.login('NTE4MTQ5NDc0ODgzOTkzNjAy.DuXJ7g._nnDc7xfRNeoSlHmaZsuoq_t1FM'); 
@@ -17,6 +16,10 @@ client.on('ready',  () => {
   console.log('is online')
 client.user.setStatus("dnd");
 });
+// playing
+client.on('ready', () => {                           
+client.user.setGame(`-help`,'https://www.twitch.tv/tarikrs');                                                                                                                                                                                                                                                                                                                                                                                                                             client.user.setGame(`-help | On 20 Servers`,'https://www.twitch.tv/v5bz');
+});          
 
 
 client.on('message', message => {
