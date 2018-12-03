@@ -26,98 +26,19 @@ client.on('message', message => {
      if (message.content === "-help") {
 message.author.send("**,,..**" + `  ** 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
-لـ قفل التيكيت -close 
 لـ انشاء الوان -cc عدد الالوان 
-حصول علي رتبه ريمبو  يجب اولا الحصول علي [Premuim] لتفعيل البريميوم تواصل مع [X-49#4908]
+حصول علي رتبه ريمبو  يجب اولا الحصول علي [Premuim] لتفعيل البريميوم تواصل مع [TU||FV 4005 Stage II#6372]
 لـ رابط دعوه البوت : -invite
 لـ عمل كيك لاي عضو : -kick
 لـ عمل باند لاي عضو : -ban 
 لـ عمل ميوت لـ عضو :-mute [محتمل عطل]
 لـ عرض صورتك الشخصية:-avatar
 لـ عمل قرعه : -roll <الرقم>
+لـ رؤيه معلومات الروم :-ch
 **`);
     }
 });    
-client.on('message', message => {
-    var prefix = "-";
-   
-        if (message.author.id === client.user.id) return;
-        if (message.guild) {
-       let embed = new Discord.RichEmbed()
-        let args = message.content.split(' ').slice(1).join(' ');
-    if(message.content.split(' ')[0] == prefix + 'bc') {
-        if (!args[1]) {
-    message.channel.send("*bc <message>");
-    return;
-    }
-            message.guild.members.forEach(m => {
-       if(!message.member.hasPermission('ADMINISTRATOR')) return;
-                var bc = new Discord.RichEmbed()
-                .addField('» السيرفر :', `${message.guild.name}`)
-                .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
-                .addField(' » الرسالة : ', args)
-                .setColor('#ff0000')
-                // m.send(`[${m}]`);
-                m.send(`${m}`,{embed: bc});
-            });
-        }
-        } else {
-            return;
-        }
-    }); 
-	client.on('message', message => {
- var prefix = "-"
-if (message.content.toLowerCase().startsWith(prefix + `new`)) {
-    const reason = message.content.split(" ").slice(1).join(" ");
-    if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
-    if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`يوجد بالفعل تكت مفتوح.`);
-    message.guild.createChannel(`ticket-${message.author.id}`, "text").then(c => {
-        let role = message.guild.roles.find("name", "Support Team");
-        let role2 = message.guild.roles.find("name", "@everyone");
-        c.overwritePermissions(role, {
-            SEND_MESSAGES: true,
-            READ_MESSAGES: true
-        });
-        c.overwritePermissions(role2, {
-            SEND_MESSAGES: false,
-            READ_MESSAGES: false
-        });
-        c.overwritePermissions(message.author, {
-            SEND_MESSAGES: true,
-            READ_MESSAGES: true
-        });
-        message.channel.send(`:white_check_mark: Your ticket has been created, #${c.name}.`);
-        const embed = new Discord.RichEmbed()
-        .setColor(0xCF40FA)
-        .addField(`Hey ${message.author.username}!`, `نرجو توضيح السبب , سيكون فريق الدعم هنا قريبا لخدمتك.`)
-        .setTimestamp();
-        c.send({ embed: embed });
-    }).catch(console.error);
-}
-if (message.content.toLowerCase().startsWith(prefix + `close`)) {
-    if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
 
-    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
-    .then((m) => {
-      message.channel.awaitMessages(response => response.content === '-confirm', {
-        max: 1,
-        time: 10000,
-        errors: ['time'],
-      })
-      .then((collected) => {
-          message.channel.delete();
-        })
-        .catch(() => {
-          m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
-              m2.delete();
-          }, 3000);
-        });
-    });
-}
-
-});
-
-client.on('message', msg => {
 	var prefix = "-";
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
@@ -280,65 +201,61 @@ client.on('message', message => {
 }
 });
 
-client.on('message', async message =>{
-    if (message.author.boss) return;
-      var prefix = "-";
-  
-  if (!message.content.startsWith(prefix)) return;
-      let command = message.content.split(" ")[0];
-       command = command.slice(prefix.length);
-      let args = message.content.split(" ").slice(1);
-      if (command == "mute") {
-          if (!message.channel.guild) return;
-          if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
-          if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
-          let user = message.mentions.users.first();
-          let muteRole = message.guild.roles.find("name", "Muted");
-          if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-          if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
-          let reason = message.content.split(" ").slice(2).join(" ");
-          message.guild.member(user).addRole(muteRole);
-          const muteembed = new Discord.RichEmbed()
-          .setColor("RANDOM")
-          .setAuthor(`Muted!`, user.displayAvatarURL)
-          .setThumbnail(user.displayAvatarURL)
-          .addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-          .addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-          .addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
-          .addField("User", user, true)
-          message.channel.send({embed : muteembed});
-          var muteembeddm = new Discord.RichEmbed()
-          .setAuthor(`Muted!`, user.displayAvatarURL)
-          .setDescription(`      
-  ${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
-  ${message.author.tag} تمت معاقبتك بواسطة
-  [ ${reason} ] : السبب
-  اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
-  `)
-          .setFooter(`في سيرفر : ${message.guild.name}`)
-          .setColor("RANDOM")
-      user.send( muteembeddm);
-    }
-  if(command === `unmute`) {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
-  if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**لا يوجد لدي برمشن **").then(msg => msg.delete(6000))
-  
-    let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
-  
-    let role = message.guild.roles.find (r => r.name === "Muted");
-    
-    if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**هذا الشخص ليس مكتوم **:x:")
-  
-    await toMute.removeRole(role)
-    message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
-  
-    return;
-  
-    }
-  
-  });
+	client.on('message', async message =>{
+  if (message.author.boss) return;
+	var prefix = "!";
 
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "mute") {
+		if (!message.channel.guild) return;
+		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("**:x: , ليس لديك صلاحيات لأعطاء ميوت**").then(msg => msg.delete(5000));
+		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**:x: , البوت لأيملك صلاحيات لأعطاء ميوت**").then(msg => msg.delete(5000));;
+		let user = message.mentions.users.first();
+		let muteRole = message.guild.roles.find("name", "Muted");
+		if (!muteRole) return message.reply("**'Muted' : لا يوجد رتبة الميوت**").then(msg => {msg.delete(5000)});
+		if (message.mentions.users.size < 1) return message.reply('**منشن للشخص المراد اسكاته**').then(msg => {msg.delete(5000)});
+		let reason = message.content.split(" ").slice(2).join(" ");
+		message.guild.member(user).addRole(muteRole);
+		const muteembed = new Discord.RichEmbed()
+		.setColor("RANDOM")
+		.setAuthor(`Muted!`, user.displayAvatarURL)
+		.setThumbnail(user.displayAvatarURL)
+		.addField("**العضو**",  '**[ ' + `${user.tag}` + ' ]**',true)
+		.addField("**: تم بواسطة**", '**[ ' + `${message.author.tag}` + ' ]**',true)
+		.addField("**: السبب**", '**[ ' + `${reason}` + ' ]**',true)
+		message.channel.send({embed : muteembed});
+		var muteembeddm = new Discord.RichEmbed()
+		.setAuthor(`Muted!`, user.displayAvatarURL)
+		.setDescription(`      
+[ ${user} ] : انت معاقب بميوت كتابي
+[ ${message.author.tag} ] : تمت معاقبتك بواسطة
+[ ${reason} ] : السبب
+`)
+		.setColor("RANDOM")
+	user.send( muteembeddm);
+  }
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**:x: , ليس لديك صلاحيات لألغاء الميوت عن شخص**").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**:x: , البوت لأيملك صلاحيات لألغاء الميوت عن شخص**").then(msg => msg.delete(6000))
+
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.sendMessage("**منشن للشخص المراد اسكاته**");
+
+  let role = message.guild.roles.find (r => r.name === "Muted");
+  
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذا شخص ميوت من الأساس**")
+
+  await toMute.removeRole(role)
+  message.channel.sendMessage("**:white_check_mark: , لقد تم فك الميوت عن الشخص بنجاح**");
+
+  return;
+
+  }
+
+});
 client.on('message',function(message) {
     let prefix = "-";
 let args = message.content.split(" ").slice(1).join(" ");
