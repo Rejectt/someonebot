@@ -24,8 +24,7 @@ client.user.setGame(`-help`,'https://www.twitch.tv/tarikrs');                   
 
 client.on('message', message => {
      if (message.content === "-help") {
-message.author.send("**لـ ارسال رسالة لجميع الاعضاء : -bc**" + `  **
-ل عمل تيكيت :-new 
+message.author.send("**,,..**" + `  ** 
 لمسح الشات !مسح وعدد الرسائل المراد مسحها 
 لـ قفل التيكيت -close 
 لـ انشاء الوان -cc عدد الالوان 
