@@ -1,3 +1,4 @@
+.gitignore
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
@@ -365,4 +366,4 @@ const devs = ['441615240006729728'];
 
 
 client.login(process.env.BOT_TOKEN);
-.gitignore
+
