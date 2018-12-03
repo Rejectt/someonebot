@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-
+client.user.setGame(``,'https://www.twitch.tv/tarikrs'); 
 
 
 client.login('NTE4MTQ5NDc0ODgzOTkzNjAy.DuXJ7g._nnDc7xfRNeoSlHmaZsuoq_t1FM'); 
